@@ -1,0 +1,84 @@
+@startuml
+class Jugador{
+    -Puntaje:puntos [] 
+}
+class Vehiculo {
+    +MoverIzquierda(): Puntaje
+    +MoverDerecha(): Puntaje
+    -Rueda: ruedas[4]
+    -Velocidad: velocidades[]
+}
+class Puntaje
+class VehiculoCarrera
+class Enemigo
+class Rueda
+class Camion
+class Derrape {
+    +Detener(Vehiculo): Frenar
+}
+class Obstaculo {
+    +Derrapar(Obstaculo): PerderPunto
+}
+class Bache
+class Piedra
+class Aceite
+class BonificadorCombustible {
+    +Acelerar(BonificadorCombustible): Velocidad
+}
+class Velocidad
+class Meta
+class LineaPunteada
+class LineaInicio
+class ParedContencion
+class Pista {
+    +Recorrer(Rueda): Velocidad
+    -Obstaculo: obstaculos []
+    -Meta: meta
+    -LineaPunteada: lineasPunteadas
+    -LineaInicio: lineaInicio
+    -ParedContencion: paredesContencion[2]
+    -Curva: curvas [3]
+    -Fondo: fondo
+
+}
+class Curva
+class Fondo {
+    -Arbol: arboles[]
+    -Pasto: pasto
+    -Casa: casas[]
+
+}
+class Arbol
+class Pasto
+class Casa
+class Combustible {
+    +Avanzar(Combustible): Velocidad
+}
+
+Jugador o-- Vehiculo
+Jugador "1" *-- "*" Puntaje
+Vehiculo "1" *-- "300..400" Velocidad
+Vehiculo "1" *-- "4" Rueda
+Vehiculo o-- Derrape
+Vehiculo o-- BonificadorCombustible
+Vehiculo o-- Combustible
+Vehiculo <|-- Enemigo
+Vehiculo <|-- VehiculoCarrera
+Vehiculo <|-- Camion
+Vehiculo o-- Pista
+Derrape o-- Obstaculo
+Obstaculo <|-- Bache
+Obstaculo <|-- Piedra
+Obstaculo <|-- Aceite
+
+Pista "1" *-- "*" Obstaculo
+Pista "1" *-- "1" Meta
+Pista "1" *-- "1" LineaPunteada
+Pista "1" *-- "1" LineaInicio
+Pista "1" *-- "2" ParedContencion
+Pista "1" *-- "3" Curva
+Pista "1" *-- "1" Fondo
+Fondo "1" *-- "*" Casa
+Fondo *-- Pasto
+Fondo "1" *-- "*" Arbol
+@enduml
